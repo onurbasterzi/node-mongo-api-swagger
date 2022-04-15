@@ -25,6 +25,7 @@ router.get("/users/device-tokens/:robotId", (req, res, next) => {
             tokenList.push(element.deviceToken)
         })
         res.send(tokenList);
+        
     })
 });
 
