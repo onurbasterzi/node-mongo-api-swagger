@@ -11,6 +11,9 @@ mongoose.Promise=global.Promise;
 
 app.use(bodyParse.json());
 
+const swaggerUi = require('swagger-ui-express');
+swaggerDocument = require('./swagger.json');
+
 //initialize routes
 app.use('/api', require('./routes/api'));
 
@@ -19,6 +22,12 @@ app.use(function(err, req, res, next){
     //console.log(err);
     res.status(422).send({error: err.message});
 });
+
+app.use(
+    '/api-docs',
+    swaggerUi.serve, 
+    swaggerUi.setup(swaggerDocument)
+  );
 
 app.listen(process.env.port || 4000, function () {
     console.log('server started on port 4000');
